@@ -43,9 +43,15 @@ export class Animated extends React.Component {
     const {children, animationInDelay, animationOutDelay, style, isVisible, innerRef, className} = this.props;
     const {animation} = this.state;
     const classes = classNames("animated", animation, className);
+
     if (isLteIE9() || !animation) {
       style.opacity = isVisible ? 1 : 0;
     }
+
+    if (animation && isVisible) {
+      style.opacity = 1
+    }
+
     return (
       <div className={classes} ref={innerRef} style={{
         animationDelay: `${isVisible ? animationInDelay : animationOutDelay}s`,
